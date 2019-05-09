@@ -3,12 +3,12 @@ import re
 
 def atoi(s):
 	n, notnegative = 0, 1
-	if s[0]=="-":
+	if s[0] == "-":
 		notnegative = -1
 		s = s[1:]
 	for i in s:
-		n = n*10 + ord(i)-ord("0")
-	return notnegative*n
+		n = n * 10 + ord(i) - ord("0")
+	return notnegative * n
 
 def split(regex, array):
     tab = []
@@ -92,8 +92,24 @@ def result(organize):
     else:
         result += 'The polynomial degree is stricly greater than 2, I can\'t solve.'
 
+def parse(params):
+    tab = []
+    i = 0
+    while (i < len(params)):
+        if (params[i] == '='):
+            tab.append(params[i])
+        elif (len(params[i].split('*X^')) == 2):
+            tab.append(params[i].split('*X^'))
+        elif (len(params[i].split('*X')) == 2):
+            tab.append([params[i].split('*X')[0], '1'])
+        else:
+            tab.append([params[i], '0'])
+        i += 1
+    return tab
+
 res = split(r"(-?[.0-9]+\*X\^[0-9]+(?![0-9])|=|-?[0-9.]+\*X(?!\^)|-?[0-9.]+)", sys.argv[1].replace(' ', ''))
-print(res)
+tab = parse(res)
+print(tab)
 
 #organize = organize(split(r"(-?[.0-9]+\*X\^0|(?<![\^0-9])-?[.0-9]+(?![*.0-9])|=)", array), split(r"(-?[.0-9]+\*X\^1(?![0-9])|-?[.0-9]+\*X(?!\^)|=)", array), autoSplit(array))
 
