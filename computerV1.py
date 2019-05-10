@@ -37,11 +37,26 @@ def rewrite(params):
     reduced_form = ''
     for index, element in enumerate(params):
         if index == 0:
-            reduced_form += '{coeff}*X^{power} '.format(coeff = element[0], power = element[1])
+            if element[1] == '0':
+                reduced_form += '{coeff} '.format(coeff = element[0])
+            elif element[1] == '1':
+                reduced_form += '{coeff}*X '.format(coeff = element[0])
+            else:
+                reduced_form += '{coeff}*X^{power} '.format(coeff = element[0], power = element[1])
         elif element[0] < 0:
-            reduced_form += '- {coeff}*X^{power} '.format(coeff = element[0] * (-1), power = element[1])
+            if element[1] == '0':
+                reduced_form += '- {coeff} '.format(coeff = element[0] * (-1))
+            elif element[1] == '1':
+                reduced_form += '- {coeff}*X '.format(coeff = element[0] * (-1))
+            else:
+                reduced_form += '- {coeff}*X^{power} '.format(coeff = element[0] * (-1), power = element[1])
         else:
-            reduced_form += '+ {coeff}*X^{power} '.format(coeff = element[0], power = element[1])
+            if element[1] == '0':
+                reduced_form += '+ {coeff} '.format(coeff = element[0])
+            elif element[1] == '1':
+                reduced_form += '+ {coeff}*X '.format(coeff = element[0])
+            else:
+                reduced_form += '+ {coeff}*X^{power} '.format(coeff = element[0], power = element[1])
     reduced_form += '= 0' if len(reduced_form) > 0 else '0 = 0'
     return [tmp, power, reduced_form]
 
