@@ -24,6 +24,8 @@ class View:
         self.frame2.pack()
 
         Tk.Button(self.frame, bg="#bebebe", text="Solve", command=self.resolve).pack()
+        self.left.set('0')
+        self.right.set('0')
         
         self.result_frame = Tk.Frame(self.frame, bg="#141414", pady="75")
 
@@ -34,6 +36,8 @@ class View:
         self.reset_frame()
         if res[0] == False:
             Tk.Label(self.result_frame, text=res[1], fg="red", bg="#141414", bd=0, pady="25").grid(row=4, columnspan=4)
+        else:
+            self.print_result([res[1], res[2], res[3]])
         self.result_frame.pack()
 
     def reset_frame(self):
@@ -45,7 +49,7 @@ class View:
         Tk.Label(self.result_frame, text=" ---> ", bg="#141414", fg="#bebebe").grid(row=row, column=2)
         Tk.Label(self.result_frame, text=array2, bg="#141414", fg="green").grid(row=row, column=3)
     
-    def print(self, params):
+    def print_result(self, params):
         Tk.Label(self.result_frame, text="Reduced form: ", bg="#141414", fg="white").grid(row=1, column=0)
         self.print_reduce(" c + b*X + c*X^2 = 0 ", params[2], 1)
         Tk.Label(self.result_frame, text="Polynomial degree: ", bg="#141414", fg="white").grid(row=2, column=0)
