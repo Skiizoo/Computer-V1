@@ -34,8 +34,6 @@ class View:
         self.reset_frame()
         if res[0] == False:
             Tk.Label(self.result_frame, text=res[1], fg="red", bg="#141414", bd=0, pady="25").grid(row=4, columnspan=4)
-        else:
-            self.print([res[1], res[2], res[3]])
         self.result_frame.pack()
 
     def reset_frame(self):
