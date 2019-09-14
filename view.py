@@ -51,7 +51,7 @@ class View:
     
     def print_result(self, params):
         Tk.Label(self.result_frame, text="Reduced form: ", bg="#141414", fg="white").grid(row=1, column=0)
-        self.print_reduce(" c + b*X + c*X^2 = 0 ", params[2], 1)
+        self.print_reduce(" a*X^2 + b*X + c = 0 ", params[2], 1)
         Tk.Label(self.result_frame, text="Polynomial degree: ", bg="#141414", fg="white").grid(row=2, column=0)
         Tk.Label(self.result_frame, text=params[1], bg="#141414", fg="green").grid(row=2, column=3)
         if params[1] <= 2:
